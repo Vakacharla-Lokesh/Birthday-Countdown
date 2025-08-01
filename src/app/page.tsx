@@ -1,12 +1,13 @@
-import { getUpcomingBirthdays } from "@/lib/dates";
-import { friendsData } from "@/lib/data";
-import BirthdayCountdown from "@/components/app/birthday-countdown";
-import BirthdayTimeline from "@/components/app/birthday-timeline";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { ThemeToggle } from "@/components/app/theme-toggle";
-import { FullscreenToggle } from "@/components/app/fullscreen-toggle";
-import BalloonBackground from "@/components/app/balloon-background";
+import { getUpcomingBirthdays } from '@/lib/dates';
+import { friendsData } from '@/lib/data';
+import BirthdayCountdown from '@/components/app/birthday-countdown';
+import BirthdayTimeline from '@/components/app/birthday-timeline';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { ThemeToggle } from '@/components/app/theme-toggle';
+import { FullscreenToggle } from '@/components/app/fullscreen-toggle';
+import BalloonBackground from '@/components/app/balloon-background';
+import BirthdayCelebration from '@/components/app/birthday-celebration';
 
 export default function Home() {
   const sortedBirthdays = getUpcomingBirthdays(friendsData);
@@ -29,12 +30,13 @@ export default function Home() {
           </p>
         </header>
 
-        <section
-          id="countdown"
-          className="mb-8 md:mb-12"
-        >
+        <section id="countdown" className="mb-8 md:mb-12">
           {upcomingFriend ? (
-            <BirthdayCountdown friend={upcomingFriend} />
+            upcomingFriend.isToday ? (
+              <BirthdayCelebration friend={upcomingFriend} />
+            ) : (
+              <BirthdayCountdown friend={upcomingFriend} />
+            )
           ) : (
             <Card>
               <CardContent className="p-8 text-center">
@@ -49,9 +51,7 @@ export default function Home() {
         <section id="timeline">
           <Card>
             <CardHeader>
-              <CardTitle className="text-2xl font-headline">
-                Birthday Timeline
-              </CardTitle>
+              <CardTitle className="text-2xl font-headline">Birthday Timeline</CardTitle>
             </CardHeader>
             <CardContent>
               {sortedBirthdays.length > 0 ? (

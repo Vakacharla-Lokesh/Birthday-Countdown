@@ -34,7 +34,12 @@ const CountdownUnit = ({ value, label }: { value: number; label: string }) => {
 };
 
 export default function BirthdayCountdown({ friend }: BirthdayCountdownProps) {
-  const { days, hours, minutes, seconds } = useCountdown(friend.nextBirthday.toISOString());
+  const targetDate = new Date(friend.nextBirthday);
+  // Adjust to IST for countdown display
+  const istOffset = 5.5 * 60 * 60 * 1000;
+  const istTargetDate = new Date(targetDate.getTime() - istOffset);
+  
+  const { days, hours, minutes, seconds } = useCountdown(istTargetDate.toISOString());
 
   return (
     <Card className="overflow-hidden shadow-lg border-2 border-primary">

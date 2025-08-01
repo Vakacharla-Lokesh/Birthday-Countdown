@@ -5,42 +5,6 @@ export interface Friend {
   avatar: string;
 }
 
-const generateBirthdays = () => {
-  const friends: Friend[] = [];
-  const today = new Date();
-  const names = [
-    "Alex Johnson",
-    "Maria Garcia",
-    "Chen Wei",
-    "Fatima Al-Fassi",
-    "David Smith",
-    "Yuki Tanaka",
-    "Olga Petrova",
-    "Carlos Rodriguez",
-    "Aisha Khan",
-    "John Miller",
-    "Sofia Rossi",
-    "Liam O'Connell",
-  ];
-
-  for (let i = 0; i < names.length; i++) {
-    const date = new Date(today);
-    date.setMonth(today.getMonth() + i);
-    date.setDate(Math.floor(Math.random() * 28) + 1);
-
-    friends.push({
-      id: i + 1,
-      name: names[i],
-      birthday: `199${i % 10}-${String(date.getMonth() + 1).padStart(
-        2,
-        "0"
-      )}-${String(date.getDate()).padStart(2, "0")}`,
-      avatar: `https://placehold.co/128x128.png`,
-    });
-  }
-  return friends;
-};
-
 export const friendsData: Friend[] = [
   {
     id: 0,
